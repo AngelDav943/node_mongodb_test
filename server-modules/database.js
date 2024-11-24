@@ -3,35 +3,26 @@ const hash = require("sha256");
 
 const uri = "mongodb://localhost:27017/";
 const clientDB = new MongoClient(uri);
+let mainDatabase = null;
+
+async function connectDatabase() {
+    return await clientDB.connect();
+}
+
+async function getMainDatabase() {
+    const isOnline = await connectDatabase();
+    if (isOnline == false) return undefined;
+
+    if (mainDatabase != null) return mainDatabase
+
+    mainDatabase = await clientDB.db("test");
+    return mainDatabase
+}
 
 module.exports = {
-    async connectDatabase() {
-        return await clientDB.connect();
-    },
-
-    async getMainDatabase() {
-        const isOnline = await this.connectDatabase();
-        if (isOnline == false) return undefined;
-
-        return await clientDB.db("test");
-    },
-
-    async listDatabases() {
-        const isOnline = await this.connectDatabase();
-        if (isOnline == false) return;
-
-        const databasesList = await clientDB.db().admin().listDatabases();
-
-        console.log("databases:");
-        databasesList.databases.forEach((db) => console.log(` - ${db.name}`));
-
-        return {
-            ok: true,
-        };
-    },
 
     async listUsers() {
-        const database = await this.getMainDatabase();
+        const database = await getMainDatabase();
         if (database == undefined) return;
 
         const usersCollection = await database.collection("users");

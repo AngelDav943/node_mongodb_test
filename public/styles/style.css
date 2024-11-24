@@ -29,3 +29,10 @@ section.main {
     width: calc(100vw - 2em);
     margin: auto;
 }
+
+form input {
+    box-sizing: border-box;
+    width: 100%;
+    display: block;
+    margin-bottom: 0.5rem;
+}

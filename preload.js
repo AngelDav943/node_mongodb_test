@@ -11,7 +11,8 @@ module.exports = async function(req, res, data) {
         user_username: "Guest"
     }
 
-
+    // TODO: Add user management? i guess
+    // TODO: Show user in header when logged in and login button when logged out
 
     return {
         other: {

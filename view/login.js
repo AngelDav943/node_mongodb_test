@@ -1,3 +1,5 @@
+const database = require(`../server-modules/database.js`);
+
 module.exports = async function (req, res, page) {
 
     if (req.method == "GET") {
@@ -14,7 +16,7 @@ module.exports = async function (req, res, page) {
     }
 
     if (req.method == "POST") {
-        console.log("new register!!")
+        console.log("omg login!!")
         res.json({
             "ok": true,
             "body": req.body
