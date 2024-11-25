@@ -1,4 +1,4 @@
-const database = require(`../server-modules/database.js`);
+const { loginUser } = require("../server-modules/database");
 
 module.exports = async function (req, res, page) {
 
@@ -16,10 +16,10 @@ module.exports = async function (req, res, page) {
     }
 
     if (req.method == "POST") {
-        console.log("omg login!!")
-        res.json({
-            "ok": true,
-            "body": req.body
-        })
+        const { username, password } = req.body;
+        
+        const loginData = await loginUser(username, password);
+
+        res.json(loginData)
     }
 };

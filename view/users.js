@@ -1,7 +1,7 @@
-const database = require(`../server-modules/database.js`);
+const { listUsers } = require("../server-modules/database.ts");
 
 module.exports = async function (req, res, page) {
-    const data = await database.listUsers();
+    const data = await listUsers();
 
     console.log("data");
     console.dir(data);

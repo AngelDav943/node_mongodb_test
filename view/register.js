@@ -1,4 +1,4 @@
-const database = require(`../server-modules/database.js`);
+const { createUser } = require("../server-modules/database");
 
 module.exports = async function (req, res, page) {
 
@@ -16,10 +16,15 @@ module.exports = async function (req, res, page) {
     }
 
     if (req.method == "POST") {
-        console.log("new register!!")
-        res.json({
+        const { username, password } = req.body;
+
+        const newUser = await createUser(username, password)
+
+        /*res.json({
             "ok": true,
             "body": req.body
-        })
+        })*/
+
+        res.json(newUser)
     }
 };
