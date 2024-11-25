@@ -4,7 +4,7 @@ const app = express();
 const http = require('http').Server(app);
 const page = require('angeldav-loaderhtml');
 
-page.url = "http://localhost:80"
+page.url = null
 page.default.template = `${__dirname}/templates/base.html`
 page.default.notfound = `${__dirname}/pages/error.html`
 
